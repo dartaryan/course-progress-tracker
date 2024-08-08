@@ -44,6 +44,12 @@ function calculateProgress() {
         progressCircle.style.transition = 'stroke-dashoffset 1s ease-in-out';
         progressCircle.style.strokeDashoffset = offset.toString();
         animatePercentageText(percentageWatched);
+
+        document.getElementById('time1_2').innerText = formatTime(remainingTimeInMinutes / 1.2);
+        document.getElementById('time1_4').innerText = formatTime(remainingTimeInMinutes / 1.4);
+        document.getElementById('time1_6').innerText = formatTime(remainingTimeInMinutes / 1.6);
+        document.getElementById('time1_8').innerText = formatTime(remainingTimeInMinutes / 1.8);
+        document.getElementById('time2_0').innerText = formatTime(remainingTimeInMinutes / 2);
     }, 50);
 }
 
