@@ -48,14 +48,14 @@ function calculateProgress() {
 }
 
 function calculateColor(percentage) {
-    const darkColor = { h: 0, s: 50, l: 30 };
-    const lightColor = { h: 0, s: 100, l: 80 };
+    const darkColor = {h: 0, s: 50, l: 30};
+    const lightColor = {h: 0, s: 100, l: 80};
 
     const h = darkColor.h + (lightColor.h - darkColor.h) * (percentage / 100);
     const s = darkColor.s + (lightColor.s - darkColor.s) * (percentage / 100);
     const l = darkColor.l + (lightColor.l - darkColor.l) * (percentage / 100);
 
-    return `hsl(${h}, ${s}%, ${l}%)`;
+    return `hsl(${ h }, ${ s }%, ${ l }%)`;
 }
 
 function animatePercentageText(finalPercentage) {
@@ -78,5 +78,5 @@ function animatePercentageText(finalPercentage) {
 function formatTime(minutes) {
     const hours = Math.floor(minutes / 60);
     const roundedMinutes = Math.round(minutes % 60);
-    return `${hours}:${roundedMinutes < 10 ? '0' + roundedMinutes : roundedMinutes}`;
+    return `${ hours }:${ roundedMinutes < 10 ? '0' + roundedMinutes : roundedMinutes }`;
 }
