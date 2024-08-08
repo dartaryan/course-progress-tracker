@@ -11,9 +11,11 @@
   <h1>Course Progress Tracker</h1>
   <div class="input-group">
     <label for="totalHours">Total Time: </label>
+    <div>
     <input type="number" id="totalHours" placeholder="HH" min="0" style="width: 70px;">
     <span>:</span>
-    <input type="number" id="totalMinutes" placeholder="MM" min="0" max="59" style="width: 70px;">
+    <label for="totalMinutes"></label><input type="number" id="totalMinutes" placeholder="MM" min="0" max="59" style="width: 70px;">
+    </div>
   </div>
 
   <div class="toggle-group">
@@ -24,18 +26,22 @@
 
   <div class="input-group" id="remainingTimeGroup">
     <label for="remainingHours">Remaining Time: </label>
+    <div>
     <input type="number" id="remainingHours" placeholder="HH" min="0" style="width: 70px;">
     <span>:</span>
-    <input type="number" id="remainingMinutes" placeholder="MM" min="0" max="59" style="width: 70px;">
+    <label for="remainingMinutes"></label><input type="number" id="remainingMinutes" placeholder="MM" min="0" max="59" style="width: 70px;">
+    </div>
   </div>
 
   <div class="input-group" id="watchedTimeGroup" style="display: none;">
     <label for="watchedHours">Watched Time: </label>
+    <div>
     <input type="number" id="watchedHours" placeholder="HH" min="0" style="width: 70px;">
     <span>:</span>
-    <input type="number" id="watchedMinutes" placeholder="MM" min="0" max="59" style="width: 70px;">
+    <label for="watchedMinutes"></label><input type="number" id="watchedMinutes" placeholder="MM" min="0" max="59" style="width: 70px;">
+    </div>
   </div>
-
+  <hr>
   <button onclick="calculateProgress()">Calculate Progress</button>
 
   <div id="results" class="results-container">
@@ -54,6 +60,7 @@
       <p>Time at 1.4X: <span id="time1_4"></span></p>
       <p>Time at 1.6X: <span id="time1_6"></span></p>
       <p>Time at 1.8X: <span id="time1_8"></span></p>
+      <p>Time at 2.0X: <span id="time2_0"></span></p>
     </div>
   </div>
 </div>

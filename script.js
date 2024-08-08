@@ -32,56 +32,51 @@ function calculateProgress() {
     const percentageWatched = ((totalTimeInMinutes - remainingTimeInMinutes) / totalTimeInMinutes) * 100;
 
     const progressCircle = document.getElementById('circleProgress');
-    const percentageText = document.getElementById('percentage');
+    const circleCircumference = 2 * Math.PI * 45;
+    const offset = circleCircumference - (percentageWatched / 100) * circleCircumference;
 
-    progressCircle.style.strokeDashoffset = 283;
+    progressCircle.style.strokeDashoffset = '283';
     progressCircle.style.transition = 'none';
 
     progressCircle.getBoundingClientRect();
 
-    const circleCircumference = 2 * Math.PI * 45;
-    const offset = circleCircumference - (percentageWatched / 100) * circleCircumference;
-
     setTimeout(() => {
-        progressCircle.style.transition = 'stroke-dashoffset 1s ease-in-out, stroke 1s ease-in-out';
-        progressCircle.style.strokeDashoffset = offset;
+        progressCircle.style.transition = 'stroke-dashoffset 1s ease-in-out';
+        progressCircle.style.strokeDashoffset = offset.toString();
+        animatePercentageText(percentageWatched);
     }, 50);
+}
 
-    let color;
-    if (percentageWatched < 10) {
-        color = '#4f2323';
-    } else if (percentageWatched < 20) {
-        color = '#5d2828';
-    } else if (percentageWatched < 30) {
-        color = '#722e2e';
-    } else if (percentageWatched < 40) {
-        color = '#8f3a3a';
-    } else if (percentageWatched < 50) {
-        color = '#a94545';
-    } else if (percentageWatched < 60) {
-        color = '#bb4e4e';
-    } else if (percentageWatched < 70) {
-        color = '#d66161';
-    } else if (percentageWatched < 80) {
-        color = '#e87b7b';
-    } else if (percentageWatched < 90) {
-        color = '#ff6b6b';
-    } else {
-        color = '#ffabab';
-    }
-    progressCircle.style.stroke = color;
+function calculateColor(percentage) {
+    const darkColor = { h: 0, s: 50, l: 30 };
+    const lightColor = { h: 0, s: 100, l: 80 };
 
-    percentageText.innerText = percentageWatched.toFixed(2) + '%';
-    percentageText.style.opacity = 1;
+    const h = darkColor.h + (lightColor.h - darkColor.h) * (percentage / 100);
+    const s = darkColor.s + (lightColor.s - darkColor.s) * (percentage / 100);
+    const l = darkColor.l + (lightColor.l - darkColor.l) * (percentage / 100);
 
-    document.getElementById('time1_2').innerText = formatTime(remainingTimeInMinutes / 1.2);
-    document.getElementById('time1_4').innerText = formatTime(remainingTimeInMinutes / 1.4);
-    document.getElementById('time1_6').innerText = formatTime(remainingTimeInMinutes / 1.6);
-    document.getElementById('time1_8').innerText = formatTime(remainingTimeInMinutes / 1.8);
+    return `hsl(${h}, ${s}%, ${l}%)`;
+}
+
+function animatePercentageText(finalPercentage) {
+    const percentageText = document.getElementById('percentage');
+    const progressCircle = document.getElementById('circleProgress');
+    percentageText.style.opacity = '1';
+    let currentPercentage = 0;
+    const increment = finalPercentage / 100;
+    const interval = setInterval(() => {
+        currentPercentage += increment;
+        if (currentPercentage >= finalPercentage) {
+            currentPercentage = finalPercentage;
+            clearInterval(interval);
+        }
+        percentageText.innerText = currentPercentage.toFixed(2) + '%';
+        progressCircle.style.stroke = calculateColor(currentPercentage);
+    }, 10);
 }
 
 function formatTime(minutes) {
     const hours = Math.floor(minutes / 60);
-    const mins = Math.round(minutes % 60);
-    return `${ hours }:${ mins < 10 ? '0' + mins : mins }`;
+    const roundedMinutes = Math.round(minutes % 60);
+    return `${hours}:${roundedMinutes < 10 ? '0' + roundedMinutes : roundedMinutes}`;
 }

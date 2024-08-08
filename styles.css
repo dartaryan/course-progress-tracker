@@ -35,6 +35,9 @@ h1 {
 }
 
 .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
     margin-bottom: 0.9375rem;
 }
 
@@ -55,7 +58,7 @@ h1 {
 }
 
 label {
-    display: block;
+    /*display: block;*/
     margin-bottom: 0.3125rem;
     color: #b0b0b0;
     font-weight: 700;
@@ -120,8 +123,13 @@ input[type="radio"]:focus {
     outline: none;
 }
 
+hr {
+    width: 80%;
+    border: 0.0425rem solid #a9a9a97a;
+    margin: 1.25rem auto;
+}
+
 button {
-    margin-top: 1.25rem;
     padding: 0.625rem;
     background-color: #ff6b6b;
     color: white;
@@ -187,7 +195,7 @@ button:hover {
     font-size: 1.25rem;
     font-weight: bold;
     transition: opacity 1s ease-in-out;
-    opacity: 0;
+    opacity: 1;
 }
 
 .time-results {
